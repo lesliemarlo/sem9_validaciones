@@ -358,7 +358,7 @@ $("#id_btn_actualiza").click(function(){
 
 
 </script>
-
+<!-- REGISTRAR -->
 <script type="text/javascript">
 	$('#id_form_registra').bootstrapValidator({
         message: 'This value is not valid',
@@ -368,6 +368,7 @@ $("#id_btn_actualiza").click(function(){
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
+        	//REGISTRRA NOMBRE
         	"nombre": {
         		selector : '#id_reg_nombre',
                 validators: {
@@ -378,6 +379,16 @@ $("#id_btn_actualiza").click(function(){
                     	message:'El nombre es de 5 a 100 caracteres',
                     	min : 5,
                     	max : 100
+                    },
+                    remote :{
+                    	delay   : 1000,
+                    	url     : 'buscaModalidadPorNombreRegistra',
+                    	message : 'El nombre ya existe',
+                    	data: {
+    		                nombres: function() {
+    		                    return $('#id_reg_nombre').val();
+    		                },
+    		        	},
                     }
                 }
             },
@@ -478,7 +489,7 @@ $("#id_btn_actualiza").click(function(){
         }   
     });
 </script>
-
+<!-- ---------------------------------------------ACTUALIZAR -->
 <script type="text/javascript">
 	$('#id_form_actualiza').bootstrapValidator({
         message: 'This value is not valid',
@@ -488,6 +499,7 @@ $("#id_btn_actualiza").click(function(){
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
+        	//ACTUALIZAR NOMBRE
         	"nombre": {
         		selector : '#id_act_nombre',
                 validators: {
@@ -498,6 +510,19 @@ $("#id_btn_actualiza").click(function(){
                     	message:'El nombre es de 5 a 100 caracteres',
                     	min : 5,
                     	max : 100
+                    },
+                    remote :{
+                    	delay   : 1000,
+                    	url     : 'buscaModalidadPorNombreActualiza',
+                    	message : 'El nombre ya existe',
+                    	data: {
+    		                nombres: function() {
+    		                    return $('#id_act_nombre').val();
+    		                },
+    		                id: function() {
+    		                    return $('#id_ID').val();
+    		                },
+    		        	},
                     }
                 }
             },

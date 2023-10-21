@@ -6,14 +6,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 import com.empresa.entity.Modalidad;
 import com.empresa.service.ModalidadService;
+import com.empresa.util.FunctionUtil;
 
 @Controller
 public class ModalidadCrudController {
@@ -89,6 +93,29 @@ public class ModalidadCrudController {
 		return modalidadService.listaPorNombreLike("%"+filtro+"%");
 	}
 	
+	//4.SEMANA 9 -- 
+//PARA EL REGISTRAR
+	@GetMapping("/buscaModalidadPorNombreRegistra")
+	@ResponseBody
+	public String validaDni(String nombre) {
+		List<Modalidad> lst = modalidadService.listaPorNombreIgualRegistra(nombre);
+		if(CollectionUtils.isEmpty(lst)) {
+			return "{\"valid\":true}";
+		}else {
+			return "{\"valid\":false}";
+		}
+	}
 	
+	//PARA EL ACTUALIZAR
+	@GetMapping("/buscaModalidadPorNombreActualiza")
+	@ResponseBody
+	public String validaNombreActualiza(String nombre, int id) {
+		List<Modalidad> lst = modalidadService.listaPorNombreIgualActualiza(nombre, id);
+		if(CollectionUtils.isEmpty(lst)) {
+			return "{\"valid\":true}";
+		}else {
+			return "{\"valid\":false}";
+		}
+	}
 	
 }
